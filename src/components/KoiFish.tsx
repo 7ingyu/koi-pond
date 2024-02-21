@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
 import MotionPathPlugin from "gsap/MotionPathPlugin"
 import gsap from "gsap"
+import { generatePath, randomBetween } from "@/utils"
 
 type KoiFishProps = {
   color: 'gold' | 'red' | 'black' | 'white'
@@ -10,83 +11,35 @@ const KoiFish = ({ color = 'red' } : KoiFishProps) => {
   const tl = gsap.timeline()
 
   const fish = useRef<HTMLDivElement | null>(null)
-  function randomBetween(min: number, max: number) {
-    return Math.random() * (max - min) + min;
-  }
-
-  type Point = {
-    x: string
-    y:string
-  }
-
-  type Range = {x: [number, number], y: [number, number]}
-  const getRange = (position: 0 | 1 | 2 | 3) : Range => {
-    switch (position) {
-      case 0:
-        // top
-        return {x: [-10, 110], y: [-15, -5]}
-      case 1:
-        // right
-        return {x: [105, 115], y: [-10, 110]}
-      case 2:
-        // bottom
-        return {x: [-10, 110], y: [105, 115]}
-      case 3:
-        //left
-        return {x: [-15, -5], y: [-10, 110]}
-    }
-  }
-
-  const generatePath = () => {
-    const path = []
-
-    // start off screen
-    const startPos = Math.floor(Math.random() * 4)
-    const {x: startX, y: startY}: Range = getRange(startPos as 0 | 1 | 2 | 3)
-    path.push({
-      x: `${randomBetween(...startX)}vw`,
-      y: `${randomBetween(...startY)}vh`
-    })
-
-    path.push({
-      x: `${randomBetween(0, 100)}vw`,
-      y: `${randomBetween(0, 100)}vh`
-    })
-    // path.push({
-    //   x: `${randomBetween(51, 100)}vw`,
-    //   y: `${randomBetween(0, 50)}vh`
-    // })
-
-    // End off screen
-    const endPos = Math.floor(Math.random() * 4)
-    const {x: endX, y: endY}: Range = getRange(endPos as 0 | 1 | 2 | 3)
-    path.push({
-      x: `${randomBetween(...endX)}vw`,
-      y: `${randomBetween(...endY)}vh`
-    })
-
-    console.log(path)
-    return path
-  }
 
   const animate = () => {
     // if (fish?.current) {
     // const path = generatePath()
+    const height: string = `${randomBetween(0.5, 3)}rem`
+
+    tl.to(fish.current, {
+      height,
+      duration: 0
+    })
     tl.to(fish.current, {
       motionPath: {
         path: generatePath(),
         // align: "self",
         // alignOrigin: [0.5, 0],
         autoRotate: true,
-        // fromCurrent: false,
+        fromCurrent: false,
         curviness: 2,
         // repeatRefresh: true,
         // resolution: 20
       },
+      height,
       duration: randomBetween(10, 20),
       ease: "none",
       // repeat: started ? -1,
-      onComplete: () => animate(),
+      onComplete: () => {
+        tl.clear()
+        animate()
+      },
     });
   }
 
@@ -97,12 +50,8 @@ const KoiFish = ({ color = 'red' } : KoiFishProps) => {
 
   return (
     <div
-      className="koi position-absolute top-0 start-0"
+      className="koi position-absolute"
       ref={fish}
-      style={{
-        height: '2rem',
-        transformOrigin: "50% 50%"
-      }}
     >
       {/* <svg viewBox="0 0 800 400">
         <path id='path' style={{stroke: 'red', strokeWidth: '2px', fill: 'none'}}/>
