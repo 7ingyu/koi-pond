@@ -1,0 +1,19 @@
+.koi {
+  opacity: 0.7;
+
+  &-red {
+    fill: rgb(155, 39, 0);
+  }
+
+  &-white {
+    fill: white;
+  }
+
+  &-black {
+    fill: rgb(33, 25, 35);
+  }
+
+  &-gold {
+    fill: rgb(232, 178, 0);
+  }
+}

@@ -1,0 +1,13 @@
+[data-bs-theme="dark"] {
+  --pond-bg: rgb(12, 12, 65);
+}
+
+[data-bs-theme="light"] {
+  --pond-bg: rgb(111, 194, 241);
+}
+
+#koi-pond {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--pond-bg);
+}
