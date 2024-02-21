@@ -1,13 +1,68 @@
 [data-bs-theme="dark"] {
   --pond-bg: rgb(12, 12, 65);
+  --bg-invert: 0;
+  --water-blend: hard-light;
 }
 
 [data-bs-theme="light"] {
   --pond-bg: rgb(111, 194, 241);
+  --bg-invert: 1;
+  --water-blend: color-burn;
 }
 
 #koi-pond {
   width: 100vw;
   height: 100vh;
   background-color: var(--pond-bg);
+  overflow: clip;
+  position: relative;
+}
+
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: url('/assets/portrait.jpg');
+  background-size: cover;
+  // background-repeat: no-repeat;
+  background-position: center;
+  filter: url("#bg-turbulence") invert(var(--bg-invert));
+}
+
+.water {
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  top: -5vh;
+  left: -5vw;
+  background-image: url('/assets/water_texture.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  mix-blend-mode: var(--water-blend);
+  filter: url("#water-turbulence") grayscale(100);
+  opacity: 0.5;
+}
+
+.water-credit {
+  opacity: 0.25;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: calc(100% - 4rem);
+  text-align: right;
+  opacity: 0.5;
+  color: var(--bs-body-color);
+
+  a {
+    color: var(--bs-body-color);
+  }
+}
+
+.fish-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }

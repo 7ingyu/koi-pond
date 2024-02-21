@@ -1,9 +1,23 @@
+[data-bs-theme="dark"] {
+  --red-fish: rgb(69, 18, 1);
+  --white-fish: rgb(48, 48, 48);
+  --black-fish: black;
+  --gold-fish: rgb(59, 46, 3);
+}
+
+[data-bs-theme="light"] {
+  --red-fish: rgb(155, 39, 0);
+  --white-fish: rgb(175, 186, 190);
+  --black-fish: rgb(33, 25, 35);
+  --gold-fish: rgb(232, 178, 0);
+}
+
 .koi {
-  opacity: 0.7;
-  transition: all 0s;
+  // opacity: 0.7;
+  transition: all 0s, color 1s;
 
   * {
-    transition: all 0s;
+    transition: all 0s, color 1s;
   }
 
   .koi-svg {
@@ -12,19 +26,19 @@
   }
 
   &-red {
-    fill: rgb(155, 39, 0);
+    fill: var(--red-fish);
   }
 
   &-white {
-    fill: white;
+    fill: var(--white-fish);
   }
 
   &-black {
-    fill: rgb(33, 25, 35);
+    fill: var(--black-fish);
   }
 
   &-gold {
-    fill: rgb(232, 178, 0);
+    fill: var(--gold-fish);
   }
 
 }

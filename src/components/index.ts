@@ -1,3 +1,5 @@
 export { default as Pond } from './Pond'
+export { default as Background } from './Background'
 export { default as KoiFish } from './KoiFish'
 export { default as ThemeToggle } from './ThemeToggle'
+export { default as Water } from './Water'
