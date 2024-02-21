@@ -18,6 +18,8 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.10",
+    "@types/greensock": "^1.15.32",
+    "@types/gsap": "^3.0.0",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
