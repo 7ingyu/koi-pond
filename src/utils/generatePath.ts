@@ -6,16 +6,16 @@ const getRange = (position: 0 | 1 | 2 | 3) : Range => {
   switch (position) {
     case 0:
       // top
-      return {x: [-10, 110], y: [-15, -5]}
+      return {x: [-10, 110], y: [-25, -20]}
     case 1:
       // right
-      return {x: [105, 115], y: [-10, 110]}
+      return {x: [120, 125], y: [-10, 110]}
     case 2:
       // bottom
-      return {x: [-10, 110], y: [105, 115]}
+      return {x: [-10, 110], y: [120, 125]}
     case 3:
       //left
-      return {x: [-15, -5], y: [-10, 110]}
+      return {x: [-25, -20], y: [-10, 110]}
   }
 }
 

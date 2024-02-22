@@ -1,6 +1,6 @@
 [data-bs-theme="dark"] {
   --red-fish: rgb(69, 18, 1);
-  --white-fish: rgb(48, 48, 48);
+  --white-fish: rgb(151, 137, 126);
   --black-fish: black;
   --gold-fish: rgb(59, 46, 3);
 }
@@ -12,7 +12,14 @@
   --gold-fish: rgb(232, 178, 0);
 }
 
-.koi {
+.koi-shadow {
+  filter: drop-shadow(#00000075 0 0 0.5vw);
+  mix-blend-mode: multiply;
+}
+.koi, .koi-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
   // opacity: 0.7;
   transition: all 0s, color 1s;
 
@@ -21,8 +28,11 @@
   }
 
   .koi-svg {
+    // position: absolute;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
   }
 
   &-red {
