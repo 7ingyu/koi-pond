@@ -1,11 +1,11 @@
 [data-bs-theme="dark"] {
-  --pond-bg: rgb(12, 12, 65);
+  --pond-bg: #{$pond-bg-dark};
   --bg-invert: 0;
   --water-blend: hard-light;
 }
 
 [data-bs-theme="light"] {
-  --pond-bg: rgb(111, 194, 241);
+  --pond-bg: #{$pond-bg-light};
   --bg-invert: 1;
   --water-blend: color-burn;
 }

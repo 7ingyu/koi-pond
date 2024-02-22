@@ -5,11 +5,9 @@ $koi-colors: (
   "light": (
     "orange": (
       "base": rgb(205, 78, 0),
-      "spot": rgb(205, 78, 0),
     ),
     "white": (
       "base": rgb(175, 186, 190),
-      "spot": rgb(175, 186, 190),
     ),
     "white-red": (
       "base": rgb(175, 186, 190),
@@ -17,33 +15,32 @@ $koi-colors: (
     ),
     "white-orange": (
       "base": rgb(175, 186, 190),
-      "spot": rgb(205, 78, 0),
+      "splotch": rgb(205, 78, 0),
     ),
     "black": (
       "base": rgb(72, 67, 105),
-      "spot": rgb(72, 67, 105),
     ),
     "gold": (
       "base": rgb(232, 178, 0),
-      "spot": rgb(232, 178, 0),
     ),
     "gold-black": (
       "base": rgb(232, 178, 0),
-      "spot": rgb(72, 67, 105),
+      "splotch": rgb(72, 67, 105),
     ),
     "red": (
       "base": rgb(214, 45, 29),
-      "spot": rgb(214, 45, 29),
-    )
+    ),
+    "tancho": (
+      "base": rgb(175, 186, 190),
+      "head": rgb(214, 45, 29),
+    ),
   ),
   "dark": (
     "orange": (
       "base": rgb(100, 40, 4),
-      "spot": rgb(100, 40, 4),
     ),
     "white": (
       "base": rgb(92, 107, 112),
-      "spot": rgb(92, 107, 112),
     ),
     "white-red": (
       "base": rgb(92, 107, 112),
@@ -51,24 +48,29 @@ $koi-colors: (
     ),
     "white-orange": (
       "base": rgb(92, 107, 112),
-      "spot": rgb(100, 40, 4),
+      "splotch": rgb(100, 40, 4),
+    ),
+    "white-black": (
+      "base": rgb(92, 107, 112),
+      "splotch": rgb(17, 13, 17),
     ),
     "black": (
-      "base": rgb(31, 18, 27),
-      "spot": rgb(31, 18, 27),
+      "base": rgb(17, 13, 17),
     ),
     "gold": (
       "base": rgb(123, 98, 16),
-      "spot": rgb(123, 98, 16),
     ),
     "gold-black": (
       "base": rgb(123, 98, 16),
-      "spot": rgb(31, 18, 27),
+      "splotch": rgb(17, 13, 17),
     ),
     "red": (
       "base": rgb(94, 8, 0),
-      "spot": rgb(94, 8, 0),
-    )
+    ),
+    "tancho": (
+      "base": rgb(92, 107, 112),
+      "head": rgb(94, 8, 0),
+    ),
   )
 );
 
@@ -79,13 +81,23 @@ $koi-colors: (
 @each $theme, $colors in $koi-colors {
   [data-bs-theme="#{$theme}"] {
     @each $color, $rgbs in $colors {
-      // @debug($color);
+      @debug(if($theme == 'light', 80, 50));
       .koi-#{$color} {
         @include koi-svg(
-          map.get($rgbs, 'base'),
-          color.scale(map.get($rgbs, 'base'), $lightness: -10%),
-          color.scale(map.get($rgbs, 'base'), $lightness: 10%),
-          map.get($rgbs, 'spot')
+          $base: map.get($rgbs, 'base'),
+          $spot: if(map.get($rgbs, 'spot'), map.get($rgbs, 'spot'), rgba(255, 255, 255, 0)),
+          $splotch: if(map.get($rgbs, 'splotch'), map.get($rgbs, 'splotch'), rgba(255, 255, 255, 0)),
+          $head: if(map.get($rgbs, 'head'), map.get($rgbs, 'head'), rgba(255, 255, 255, 0)),
+          $alpha: if($theme == 'light', 80, 50),
+        );
+      }
+      .koi-shadow {
+        @include koi-svg(
+          $base: if($theme == 'light', $pond-bg-light, $pond-bg-dark),
+          $spot: if($theme == 'light', $pond-bg-light, $pond-bg-dark),
+          $splotch: if($theme == 'light', $pond-bg-light, $pond-bg-dark),
+          $head: if($theme == 'light', $pond-bg-light, $pond-bg-dark),
+          $alpha: 50,
         );
       }
     }
@@ -93,12 +105,6 @@ $koi-colors: (
 }
 
 .koi-shadow {
-  @include koi-svg(
-    rgb(0, 0, 0),
-    rgb(0, 0, 0),
-    rgb(0, 0, 0),
-    rgb(0, 0, 0)
-  );
   filter: drop-shadow(#00000075 0 0 0.5vw);
   mix-blend-mode: multiply;
 }

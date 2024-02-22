@@ -12,6 +12,7 @@ const colors = [
   "gold",
   "gold-black",
   "red",
+  "tancho"
 ]
 
 const KoiFish = () => {
@@ -25,7 +26,7 @@ const KoiFish = () => {
     // if (fish?.current) {
     const path = generatePath()
     const height: number = randomBetween(5, 10)
-    const width: number = height * 3.258;
+    const width: number = Math.ceil(height * 3.844);
     const duration = randomBetween(10, 20)
 
     const animVars = {
