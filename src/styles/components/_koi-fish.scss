@@ -1,18 +1,104 @@
-[data-bs-theme="dark"] {
-  --red-fish: rgb(69, 18, 1);
-  --white-fish: rgb(151, 137, 126);
-  --black-fish: black;
-  --gold-fish: rgb(59, 46, 3);
-}
+@use 'sass:color';
+@use 'sass:map';
 
-[data-bs-theme="light"] {
-  --red-fish: rgb(155, 39, 0);
-  --white-fish: rgb(175, 186, 190);
-  --black-fish: rgb(33, 25, 35);
-  --gold-fish: rgb(232, 178, 0);
+$koi-colors: (
+  "light": (
+    "orange": (
+      "base": rgb(205, 78, 0),
+      "spot": rgb(205, 78, 0),
+    ),
+    "white": (
+      "base": rgb(175, 186, 190),
+      "spot": rgb(175, 186, 190),
+    ),
+    "white-red": (
+      "base": rgb(175, 186, 190),
+      "spot": rgb(170, 0, 0),
+    ),
+    "white-orange": (
+      "base": rgb(175, 186, 190),
+      "spot": rgb(205, 78, 0),
+    ),
+    "black": (
+      "base": rgb(72, 67, 105),
+      "spot": rgb(72, 67, 105),
+    ),
+    "gold": (
+      "base": rgb(232, 178, 0),
+      "spot": rgb(232, 178, 0),
+    ),
+    "gold-black": (
+      "base": rgb(232, 178, 0),
+      "spot": rgb(72, 67, 105),
+    ),
+    "red": (
+      "base": rgb(214, 45, 29),
+      "spot": rgb(214, 45, 29),
+    )
+  ),
+  "dark": (
+    "orange": (
+      "base": rgb(100, 40, 4),
+      "spot": rgb(100, 40, 4),
+    ),
+    "white": (
+      "base": rgb(92, 107, 112),
+      "spot": rgb(92, 107, 112),
+    ),
+    "white-red": (
+      "base": rgb(92, 107, 112),
+      "spot": rgb(94, 8, 0),
+    ),
+    "white-orange": (
+      "base": rgb(92, 107, 112),
+      "spot": rgb(100, 40, 4),
+    ),
+    "black": (
+      "base": rgb(31, 18, 27),
+      "spot": rgb(31, 18, 27),
+    ),
+    "gold": (
+      "base": rgb(123, 98, 16),
+      "spot": rgb(123, 98, 16),
+    ),
+    "gold-black": (
+      "base": rgb(123, 98, 16),
+      "spot": rgb(31, 18, 27),
+    ),
+    "red": (
+      "base": rgb(94, 8, 0),
+      "spot": rgb(94, 8, 0),
+    )
+  )
+);
+
+// @function koi-color($color) {
+//   @return
+// }
+
+@each $theme, $colors in $koi-colors {
+  [data-bs-theme="#{$theme}"] {
+    @each $color, $rgbs in $colors {
+      // @debug($color);
+      .koi-#{$color} {
+        @include koi-svg(
+          map.get($rgbs, 'base'),
+          color.scale(map.get($rgbs, 'base'), $lightness: -10%),
+          color.scale(map.get($rgbs, 'base'), $lightness: 10%),
+          map.get($rgbs, 'spot')
+        );
+      }
+    }
+  }
 }
 
 .koi-shadow {
+  @include koi-svg(
+    rgb(0, 0, 0),
+    rgb(0, 0, 0),
+    rgb(0, 0, 0),
+    rgb(0, 0, 0)
+  );
   filter: drop-shadow(#00000075 0 0 0.5vw);
   mix-blend-mode: multiply;
 }
@@ -21,34 +107,11 @@
   top: 0;
   left: 0;
   // opacity: 0.7;
+  background-repeat: no-repeat;
+  background-size: contain;
   transition: all 0s, color 1s;
 
   * {
     transition: all 0s, color 1s;
   }
-
-  .koi-svg {
-    // position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-  }
-
-  &-red {
-    fill: var(--red-fish);
-  }
-
-  &-white {
-    fill: var(--white-fish);
-  }
-
-  &-black {
-    fill: var(--black-fish);
-  }
-
-  &-gold {
-    fill: var(--gold-fish);
-  }
-
 }
