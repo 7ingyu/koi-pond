@@ -1,8 +1,13 @@
 // import { useEffect } from "react"
 // import MotionPathPlugin from "gsap/MotionPathPlugin"
 // import gsap from "gsap"
-import { KoiFish, Water, Background, ThemeToggle } from "@/components"
-import { randomBetween } from "@/utils"
+import {
+  KoiFish,
+  Water,
+  // Background,
+  ThemeToggle
+} from "@/components"
+// import { randomBetween } from "@/utils"
 
 const Pond = ({ numFish = 20 }) => {
 
