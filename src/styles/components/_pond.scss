@@ -7,7 +7,7 @@
 [data-bs-theme="light"] {
   --pond-bg: #{$pond-bg-light};
   --bg-invert: 1;
-  --water-blend: color-burn;
+  --water-blend: luminosity;
 }
 
 #koi-pond {
@@ -33,10 +33,10 @@
 
 .water {
   position: absolute;
-  width: 110%;
-  height: 110%;
-  top: -5vh;
-  left: -5vw;
+  width: calc(100% + 60px);
+  height: calc(100% + 60px);
+  top: -30px;
+  left: -30px;
   background-image: url('/assets/water_texture.jpg');
   background-size: cover;
   background-repeat: no-repeat;

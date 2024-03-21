@@ -1,7 +1,7 @@
 // import { useEffect } from "react"
 // import MotionPathPlugin from "gsap/MotionPathPlugin"
 // import gsap from "gsap"
-import { KoiFish, Water, Background } from "@/components"
+import { KoiFish, Water, Background, ThemeToggle } from "@/components"
 import { randomBetween } from "@/utils"
 
 const Pond = ({ numFish = 20 }) => {
@@ -19,6 +19,9 @@ const Pond = ({ numFish = 20 }) => {
         })}
       </div>
       <Water />
+      <div className="p-3 d-flex justify-content-end">
+        <ThemeToggle />
+      </div>
     </div>
   )
 }
